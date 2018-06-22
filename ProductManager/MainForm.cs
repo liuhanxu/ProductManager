@@ -29,6 +29,7 @@ namespace ProductManager
 
         public MainForm()
         {
+            IEVersion.SetWebBrowserFeatures(IEVersion.GetBrowserVersion());
             InitializeComponent();
         }
 
@@ -73,6 +74,7 @@ namespace ProductManager
                 return;
             }
             listSheet.Cells.Clear();
+            webBrowser.ScriptErrorsSuppressed = true;
             tipsText.Text = "parsing urls...";
             int totalRow = catagorySheet.UsedRange.Rows.Count;
 
@@ -92,7 +94,8 @@ namespace ProductManager
                         //string srcString = gz(responseData); 
                         loading = true;
                         webBrowser.Navigate(u + "?pg=" + j);
-                        while (loading) {
+                        while (loading)
+                        {
                             System.Windows.Forms.Application.DoEvents();
                         }
                         string srcString = webBrowser.DocumentText;
@@ -240,7 +243,7 @@ namespace ProductManager
                 loading = false;
             }
         }
-
+                
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -256,26 +259,6 @@ namespace ProductManager
             }
         }
 
-
-        public string gz(byte[] cbytes)
-        {
-            using (MemoryStream dms = new MemoryStream())
-            {
-                using (MemoryStream cms = new MemoryStream(cbytes))
-                {
-                    using (System.IO.Compression.GZipStream gzip = new System.IO.Compression.GZipStream(cms, System.IO.Compression.CompressionMode.Decompress))
-                    {
-                        byte[] bytes = new byte[10240];
-                        int len = 0;
-                        while ((len = gzip.Read(bytes, 0, bytes.Length)) > 0)
-                        {
-                            dms.Write(bytes, 0, len);
-                        }
-                    }
-                }
-                return (Encoding.UTF8.GetString(dms.ToArray()));
-            }
-        }
 
         private void MainForm_Load(object sender, EventArgs e)
         {

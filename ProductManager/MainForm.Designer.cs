@@ -54,12 +54,17 @@
             // 
             // webBrowser
             // 
+            this.webBrowser.AllowWebBrowserDrop = false;
+            this.webBrowser.IsWebBrowserContextMenuEnabled = false;
             this.webBrowser.Location = new System.Drawing.Point(2, 168);
             this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser.Name = "webBrowser";
             this.webBrowser.ScriptErrorsSuppressed = true;
             this.webBrowser.Size = new System.Drawing.Size(898, 340);
             this.webBrowser.TabIndex = 6;
+            this.webBrowser.TabStop = false;
+            this.webBrowser.Url = new System.Uri("about:black", System.UriKind.Absolute);
+            this.webBrowser.WebBrowserShortcutsEnabled = false;
             // 
             // MainForm
             // 
@@ -82,7 +87,7 @@
 
         private System.Windows.Forms.Button loadExcelBtn;
         private System.Windows.Forms.TextBox tipsText;
-        private System.Windows.Forms.WebBrowser webBrowser;
+        public System.Windows.Forms.WebBrowser webBrowser;
     }
 }
 
